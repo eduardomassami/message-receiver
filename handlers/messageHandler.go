@@ -41,26 +41,28 @@ func (hdl *MessageHandler) PostTelegram(w http.ResponseWriter, r *http.Request) 
 }
 
 func (hdl *MessageHandler) PostWhatsapp(w http.ResponseWriter, r *http.Request) {
-	// fmt.Println(w)
-	// fmt.Println(r)
-	// var request telegram.TelegramPayload
-	// err := json.NewDecoder(r.Body).Decode(&request)
+	fmt.Println(w)
+	fmt.Println(r.Body)
+	var request domain.WhatsappPayload
+	err := json.NewDecoder(r.Body).Decode(&request)
 
-	// if err != nil {
-	// 	fmt.Println("error")
-	// } // else {
-	// 	e := domain.ValidateStruct(request)
-	// 	if e != nil {
-	// 		writeResponse(w, http.StatusInternalServerError, "invalid body")
-	// 		return
-	// 	}
-	// 	appError := hdl.marketsService.Post(request)
-	// 	if appError != nil {
-	// 		writeResponse(w, http.StatusInternalServerError, appError.Error())
-	// 		return
-	// 	}
-	// 	writeResponse(w, http.StatusCreated, "created")
-	// }
+	if err != nil {
+		writeResponse(w, http.StatusBadRequest, "error when decoding request")
+		return
+	} else {
+		fmt.Println(request)
+		// 	e := domain.ValidateStruct(request)
+		// 	if e != nil {
+		// 		writeResponse(w, http.StatusInternalServerError, "invalid body")
+		// 		return
+		// 	}
+		// 	appError := hdl.marketsService.Post(request)
+		// 	if appError != nil {
+		// 		writeResponse(w, http.StatusInternalServerError, appError.Error())
+		// 		return
+		// 	}
+		writeResponse(w, http.StatusAccepted, "received")
+	}
 }
 
 func writeResponse(w http.ResponseWriter, code int, data interface{}) {

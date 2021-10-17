@@ -1,18 +1,18 @@
-package telegram
+package messenger
 
 type TelegramPayload struct {
-	Headers                         Headers
-	MultiValueHeaders               MultiValueHeaders
-	Path                            string `json:"path" validate:"required"`
-	PathParameters                  string `json:"pathParameters" validate:"required"`
-	RequestContext                  RequestContext
-	Resource                        string `json:"resource" validate:"required"`
-	HttpMethod                      string `json:"httpMethod" validate:"required"`
-	QueryStringParameters           QueryStringParameters
-	MultiValueQueryStringParameters MultiValueQueryStringParameters
-	StageVariables                  string `json:"stageVariables" validate:"required"`
-	Body                            Body
-	IsOffline                       bool `json:"isOffline" validate:"required"`
+	Headers                         Headers                         `json:"headers" validate:"required"`
+	MultiValueHeaders               MultiValueHeaders               `json:"multiValueHeaders" validate:"required"`
+	Path                            string                          `json:"path" validate:"required"`
+	PathParameters                  string                          `json:"pathParameters" validate:"required"`
+	RequestContext                  RequestContext                  `json:"requestContext" validate:"required"`
+	Resource                        string                          `json:"resource" validate:"required"`
+	HttpMethod                      string                          `json:"httpMethod" validate:"required"`
+	QueryStringParameters           QueryStringParameters           `json:"queryStringParameters" validate:"required"`
+	MultiValueQueryStringParameters MultiValueQueryStringParameters `json:"multiValueQueryStringParameters" validate:"required"`
+	StageVariables                  string                          `json:"stageVariables" validate:"required"`
+	Body                            Body                            `json:"body" validate:"required"`
+	IsOffline                       bool                            `json:"isOffline" validate:"required"`
 }
 
 type Headers struct {
@@ -34,15 +34,15 @@ type MultiValueHeaders struct {
 }
 
 type RequestContext struct {
-	AccountId    string `json:"accountId" validate:"required"`
-	ResourceId   string `json:"resourceId" validate:"required"`
-	ApiId        string `json:"apiId" validate:"required"`
-	RequestId    string `json:"requestId" validate:"required"`
-	Identity     Identity
-	Authorizer   Authorizer
-	Protocol     string `json:"protocol" validate:"required"`
-	ResourcePath string `json:"resourcePath" validate:"required"`
-	HttpMethod   string `json:"httpMethod" validate:"required"`
+	AccountId    string     `json:"accountId" validate:"required"`
+	ResourceId   string     `json:"resourceId" validate:"required"`
+	ApiId        string     `json:"apiId" validate:"required"`
+	RequestId    string     `json:"requestId" validate:"required"`
+	Identity     Identity   `json:"identity" validate:"required"`
+	Authorizer   Authorizer `json:"authorizer" validate:"required"`
+	Protocol     string     `json:"protocol" validate:"required"`
+	ResourcePath string     `json:"resourcePath" validate:"required"`
+	HttpMethod   string     `json:"httpMethod" validate:"required"`
 }
 
 type Identity struct {
@@ -72,14 +72,14 @@ type MultiValueQueryStringParameters struct {
 }
 
 type Body struct {
-	UpdateId int `json:"update_id" validate:"required"`
-	Message  Message
+	UpdateId int     `json:"update_id" validate:"required"`
+	Message  Message `json:"message" validate:"required"`
 }
 
 type Message struct {
-	MessageId      int `json:"message_id" validate:"required"`
-	From           From
-	Chat           Chat
+	MessageId      int            `json:"message_id" validate:"required"`
+	From           From           `json:"from" validate:"required"`
+	Chat           Chat           `json:"chat" validate:"required"`
 	Date           int            `json:"date" validate:"required"`
 	ReplyToMessage ReplyToMessage `json:"reply_to_message" validate:"required"`
 	Text           string         `json:"text" validate:"required"`
@@ -103,12 +103,12 @@ type Chat struct {
 }
 
 type ReplyToMessage struct {
-	MessageId int `json:"message_id" validate:"required"`
-	From      From
-	Chat      Chat
-	Date      int    `json:"date" validate:"required"`
-	Text      string `json:"text" validate:"required"`
-	Entities  []Entities
+	MessageId int        `json:"message_id" validate:"required"`
+	From      From       `json:"from" validate:"required"`
+	Chat      Chat       `json:"chat" validate:"required"`
+	Date      int        `json:"date" validate:"required"`
+	Text      string     `json:"text" validate:"required"`
+	Entities  []Entities `json:"entities" validate:"required"`
 }
 
 type Entities struct {
